@@ -1,0 +1,12 @@
+# Default values for deployment.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+domain: apps.c01.lnxlabs.de
+
+images:
+  app: quay.io/slauger/hello-openshift:latest@sha256:e7a88ed34f72a083e33603437a303f7c3c0de8f90311ba91580b8666d3a44a13
+  proxy: openshift/oauth-proxy:latest
+
+cookie:
+  secret: asdfg12345

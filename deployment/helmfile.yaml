@@ -1,0 +1,6 @@
+---
+releases:
+  - name: "deployment-1"
+    namespace: "default"
+    createNamespace: false
+    chart: "./deployment"
