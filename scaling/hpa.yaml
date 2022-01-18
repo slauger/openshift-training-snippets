@@ -3,10 +3,13 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: deployment-1
 spec:
-  maxReplicas: 10
-  minReplicas: 4
+  maxReplicas: 7
+  minReplicas: 1
   scaleTargetRef:
-    apiVersion: apps/v1
+    apiVersion: apps.openshift.io/v1
     kind: Deployment
     name: deployment-1
-  targetCPUUtilizationPercentage: 1
+  targetCPUUtilizationPercentage: 75
+status:
+  currentReplicas: 5
+  desiredReplicas: 0

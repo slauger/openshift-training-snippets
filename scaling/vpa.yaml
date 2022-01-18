@@ -1,11 +1,11 @@
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: httpd-example
+  name: deployment-1
 spec:
   targetRef:
-    apiVersion: apps.openshift.io/v1
-    kind: DeploymentConfig
-    name: httpd-example
+    apiVersion: apps/v1
+    kind: Deployment
+    name: deployment-1
   updatePolicy:
     updateMode: "Off"
