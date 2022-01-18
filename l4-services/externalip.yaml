@@ -1,13 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-svc
+  name: deployment-1-external
 spec:
   externalIPs:
   - 192.168.1.193
   ports:
-  - name: mysql
-    port: 3306
+  - name: http
+    port: 8080
+    protocol: TCP
+  - name: https
+    port: 8443
     protocol: TCP
   selector:
     app: mysql

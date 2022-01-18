@@ -1,11 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-lb
+  name: deployment-1-lb
 spec:
   ports:
-  - port: 3306
+  - name: http
+    port: 8080
+    protocol: TCP
+  - name: https
+    port: 8443
     protocol: TCP
   selector:
-    name: mysql-lb
+    app: deployment-1
   type: LoadBalancer
