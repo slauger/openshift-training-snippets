@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress-edge
+  annotations:
+    route.openshift.io/termination: "edge" 
+spec:
+  rules:
+  - host: {{ .Release.Name }}-ingress-edge.{{ .Values.domain }}
+    http:
+      paths:
+      - path: ""
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ .Release.Name }}
+            port:
+              name: http
+  tls:
+  - hosts:
+    - {{ .Release.Name }}-ingress.{{ .Values.domain }}
+    secretName: {{ .Release.Name }}-tls-cert

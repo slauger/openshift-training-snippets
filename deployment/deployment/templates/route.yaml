@@ -6,9 +6,9 @@ metadata:
     haproxy.router.openshift.io/disable_cookies: 'true'
   labels:
     app: {{ .Release.Name }}
-  name: {{ .Release.Name }}
+  name: {{ .Release.Name }}-route-reencrypt
 spec:
-  host: {{ .Release.Name }}.{{ .Values.domain }}
+  host: {{ .Release.Name }}-route-reencrypt.{{ .Values.domain }}
   port:
     targetPort: https
   to:
