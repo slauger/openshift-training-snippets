@@ -1,6 +1,10 @@
 ---
 releases:
   - name: "deployment-1"
-    namespace: "default"
-    createNamespace: false
+    namespace: "training-openshift"
+    createNamespace: true
+    chart: "./deployment"
+  - name: "deployment-2"
+    namespace: "training-openshift"
+    createNamespace: true
     chart: "./deployment"
