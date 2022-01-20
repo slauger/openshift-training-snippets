@@ -13,5 +13,5 @@ spec:
     port: 8443
     protocol: TCP
   selector:
-    app: mysql
+    app: deployment-1
   type: ClusterIP
