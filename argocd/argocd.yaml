@@ -1,0 +1,103 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd
+spec:
+  controller:
+    parallelismLimit: 10
+    processors: {}
+    sharding: {}
+  dex:
+    openShiftOAuth: true
+  disableAdmin: true
+  grafana:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  ha:
+    enabled: false
+  #initialSSHKnownHosts:
+  #  keys: |
+  #    github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+  #    github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
+  #    github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+  initialRepositories: |
+    - url: https://github.com/slauger/openshift-training-snippets
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  rbac:
+    defaultPolicy: ""
+    policy: |
+      g, openshift-admins, role:admin
+    scopes: '[groups]'
+  redis:
+  repo:
+  resourceInclusions: |
+    - apiGroups:
+      - project.openshift.io/v1
+      kinds:
+      - "ProjectRequest"
+      - "Project"
+      clusters:
+      - "*"
+    - apiGroups:
+      - ""
+      kinds:
+      - ConfigMap
+      - Endpoints
+      - LimitRange
+      - Namespace
+      - PersistentVolumeClaim
+      - PersistentVolume
+      - Pod
+      - ReplicationController
+      - ResourceQuota
+      - ServiceAccount
+      - Service
+      clusters:
+      - "*"
+    - apiGroups:
+      - "rbac.authorization.k8s.io"
+      kinds:
+      - RoleBinding
+      - Role
+      clusters:
+      - "*"
+    - apiGroups:
+      - "networking.k8s.io"
+      - "extensions"
+      - "cert-manager.io"
+      - "batch"
+      - "argoproj.io"
+      - "apps"
+      - "apiextensions.k8s.io"
+      - "apiregistration.k8s.io"
+      - "acme.cert-manager.io"
+      kinds:
+      - "*"
+      clusters:
+      - "*"
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    resources:
+    route:
+      enabled: true
+      tls:
+        insecureEdgeTerminationPolicy: Redirect
+        termination: reencrypt
+    service:
+      type: ""
+  tls:
+    ca: {}

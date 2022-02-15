@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: applicationset
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-applicationset
+spec:
+  generators:
+  - git:
+      files:
+      - path: argocd/applicationset/*.json
+      repoURL: https://github.com/slauger/openshift-training-snippets
+      revision: master
+  template:
+    metadata:
+      name: "{{ name }}"
+    spec:
+      destination:
+        namespace: "{{ namespace }}"
+        server: https://kubernetes.default.svc
+      project: "{{ project }}"
+      source:
+        helm:
+          valueFiles:
+          - '{{ valueFile }}'
+        path: '{{ directory }}'
+        repoURL: '{{ repoURL }}'
+        targetRevision: '{{ targetRevision }}'
+      syncPolicy:
+        automated:
+          prune: true
