@@ -1,0 +1,9 @@
+{
+  "name": "customer3",
+  "namespace": "argocd-demo",
+  "project": "applicationset",
+  "valueFile": "values.yaml",
+  "directory": "deployment/test-chart",
+  "repoURL": "https://github.com/slauger/openshift-training-snippets",
+  "targetRevision": "master"
+}
