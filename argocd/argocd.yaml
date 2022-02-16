@@ -3,6 +3,7 @@ kind: ArgoCD
 metadata:
   name: argocd
 spec:
+  applicationSet: {}
   controller:
     parallelismLimit: 10
     processors: {}
